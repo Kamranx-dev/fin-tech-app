@@ -16,6 +16,7 @@ import com.safarov.techapp.util.DTOCheckUtil;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserRegisterService {
     DTOCheckUtil dtoCheckUtil;
+    PasswordEncoder passwordEncoder;
     AccountRepository accountRepository;
     UserRepository userRepository;
 
@@ -38,7 +40,7 @@ public class UserRegisterService {
         TechUser savedUser = userRepository.save(user);
 
         return CommonResponseDTO.builder().status(Status.builder()
-                .statusCode(StatusCode.Success)
+                .statusCode(StatusCode.SUCCESS)
                 .message("Registration has been successfully")
                 .build()).data(UserResponseDTO.entityResponse(savedUser)).build();
     }
@@ -59,7 +61,7 @@ public class UserRegisterService {
                 .name(userRequestDTO.getName())
                 .surname(userRequestDTO.getSurname())
                 .pin(userRequestDTO.getPin())
-                .password(userRequestDTO.getPassword())
+                .password(passwordEncoder.encode(userRequestDTO.getPassword()))
                 .role("USER_ROLE")
                 .build();
         user.addAccountToUser(userRequestDTO.getAccountRequestDTOList());

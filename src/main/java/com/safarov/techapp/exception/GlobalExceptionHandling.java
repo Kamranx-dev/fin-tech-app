@@ -37,4 +37,14 @@ public class GlobalExceptionHandling {
     public ResponseEntity<?> accountExist(AccountAlreadyExist accountAlreadyExist) {
         return new ResponseEntity<>(accountAlreadyExist.getCommonResponseDTO(), HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(value = NoSuchUserExistException.class)
+    public ResponseEntity<?> userNotExist(NoSuchUserExistException noSuchUserExistException) {
+        return new ResponseEntity<>(noSuchUserExistException.getResponseDTO(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = BadInputCredentialException.class)
+    public ResponseEntity<?> badCredentials(BadInputCredentialException badInputCredentialException) {
+        return new ResponseEntity<>(badInputCredentialException.getResponseDTO(), HttpStatus.UNAUTHORIZED);
+    }
 }
