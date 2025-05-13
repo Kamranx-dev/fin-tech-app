@@ -11,6 +11,5 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-
-
+SECRET_KEY: b4)w*p#=h0bsd&3titewgmh=7$#&8stgj+wa6qbddon##x)nr8
 
