@@ -52,4 +52,29 @@ public class GlobalExceptionHandling {
     public ResponseEntity<?> noActiveAccount(NoActiveAccountException noActiveAccountException) {
         return new ResponseEntity<>(noActiveAccountException.getCommonResponseDTO(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = InvalidAmountException.class)
+    public ResponseEntity<?> invalidAmount(InvalidAmountException invalidAmountException) {
+        return new ResponseEntity<>(invalidAmountException.getCommonResponseDTO(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = EqualsAccountException.class)
+    public ResponseEntity<?> sameAccounts(EqualsAccountException equalsAccountException) {
+        return new ResponseEntity<>(equalsAccountException.getCommonResponseDTO(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = InsufficientBalanceException.class)
+    public ResponseEntity<?> insufficientBalance(InsufficientBalanceException insufficientBalanceException) {
+        return new ResponseEntity<>(insufficientBalanceException.getCommonResponseDTO(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = NoExistAccountException.class)
+    public ResponseEntity<?> noExistAccount(NoExistAccountException noExistAccountException) {
+        return new ResponseEntity<>(noExistAccountException.getCommonResponseDTO(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = InvalidUserAccessException.class)
+    public ResponseEntity<?> userNotAccess(InvalidUserAccessException invalidUserAccessException) {
+        return new ResponseEntity<>(invalidUserAccessException.getCommonResponseDTO(), HttpStatus.FORBIDDEN);
+    }
 }
