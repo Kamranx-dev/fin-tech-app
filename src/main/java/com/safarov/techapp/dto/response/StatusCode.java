@@ -1,0 +1,16 @@
+package com.safarov.techapp.dto.response;
+
+public enum StatusCode {
+    INVALID_DTO,
+    ALREADY_EXIST,
+    SUCCESS,
+    USER_NOT_EXIST,
+    BAD_CREDENTIALS,
+    NO_ACTIVE_ACCOUNT,
+    INVALID_AMOUNT,
+    EQUALS_ACCOUNTS,
+    INSUFFICIENT_BALANCE,
+    ACCOUNT_NOT_EXIST,
+    INVALID_USER_ACCESS,
+    INTERNAL_ERROR
+}
