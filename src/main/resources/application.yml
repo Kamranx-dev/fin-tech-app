@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://127.0.0.1:1433;databaseName=Fin_tech;encrypt=false;trustServerCertificate=true;characterEncoding=UTF-8
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: bestuser
+    password: bestuser
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+
+
