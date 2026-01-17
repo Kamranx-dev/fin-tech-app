@@ -6,7 +6,6 @@ import com.safarov.tech_app.dto.response.CommonResponseDTO;
 import com.safarov.tech_app.dto.response.Status;
 import com.safarov.tech_app.dto.response.StatusCode;
 import com.safarov.tech_app.dto.response.UserResponseDTO;
-import com.safarov.tech_app.entity.Account;
 import com.safarov.tech_app.entity.TechUser;
 import com.safarov.tech_app.exception.AccountAlreadyExistException;
 import com.safarov.tech_app.exception.UserAlreadyExistException;
@@ -16,6 +15,7 @@ import com.safarov.tech_app.util.DTOCheckUtil;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +27,7 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserRegisterService {
     DTOCheckUtil dtoCheckUtil;
+    PasswordEncoder passwordEncoder;
     TechUserRepository userRepository;
     AccountRepository accountRepository;
 
@@ -59,7 +60,7 @@ public class UserRegisterService {
                 .name(userRequestDTO.getName())
                 .surname(userRequestDTO.getSurname())
                 .pin(userRequestDTO.getPin())
-                .password(userRequestDTO.getPassword())
+                .password(passwordEncoder.encode(userRequestDTO.getPassword()))
                 .role("USER_ROLE").build();
         techUser.addAccountToUser(userRequestDTO.getAccountRequestDTOList());
         return techUser;

@@ -1,6 +1,8 @@
 package com.safarov.tech_app.controller;
 
+import com.safarov.tech_app.dto.request.AuthenticationRequestDTO;
 import com.safarov.tech_app.dto.request.UserRequestDTO;
+import com.safarov.tech_app.service.UserLoginService;
 import com.safarov.tech_app.service.UserRegisterService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -19,9 +21,15 @@ import org.springframework.web.bind.annotation.RestController;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
     UserRegisterService userRegisterService;
+    UserLoginService userLoginService;
 
     @PostMapping("/registration")
     public ResponseEntity<?> registerUser(@RequestBody UserRequestDTO userRequestDTO) {
         return new ResponseEntity<>(userRegisterService.saveUser(userRequestDTO), HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody AuthenticationRequestDTO authenticationRequestDTO) {
+        return new ResponseEntity<>(userLoginService.loginUser(authenticationRequestDTO), HttpStatus.OK);
     }
 }
