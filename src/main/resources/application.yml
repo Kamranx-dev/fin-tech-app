@@ -4,11 +4,14 @@ spring:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: bestuser
     password: bestuser
+
   jpa:
     database-platform: org.hibernate.dialect.SQLServer2012Dialect
     open-in-view: false
     show-sql: true
     hibernate:
       ddl-auto: update
+
+SECRET_KEY: $91-vl+uh#6a#n=(7133@+wwkf5cy-0_(e(7!xtpzccka5q+kw
 
 

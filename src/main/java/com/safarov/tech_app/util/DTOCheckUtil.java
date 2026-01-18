@@ -1,5 +1,6 @@
 package com.safarov.tech_app.util;
 
+import com.safarov.tech_app.dto.request.AccountRequestDTO;
 import com.safarov.tech_app.dto.request.AuthenticationRequestDTO;
 import com.safarov.tech_app.dto.request.UserRequestDTO;
 import com.safarov.tech_app.dto.response.CommonResponseDTO;
@@ -12,6 +13,8 @@ import lombok.experimental.FieldDefaults;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -26,7 +29,16 @@ public class DTOCheckUtil {
         checkDtoInput(userRequestDTO.getSurname());
         checkDtoInput(userRequestDTO.getPin());
         checkDtoInput(userRequestDTO.getPassword());
-        checkDtoInput(userRequestDTO.getAccountRequestDTOList());
+
+        List<AccountRequestDTO> accountRequestDTOList = userRequestDTO.getAccountRequestDTOList();
+        checkDtoInput(accountRequestDTOList);
+        accountRequestDTOList.forEach(account -> {
+            checkDtoInput(account.getBalance());
+            checkDtoInput(account.getCurrency());
+            checkDtoInput(account.getIsActive());
+            checkDtoInput(account.getAccountNo());
+        });
+
     }
 
     public void isValid(AuthenticationRequestDTO authenticationRequestDTO) {
@@ -35,7 +47,8 @@ public class DTOCheckUtil {
     }
 
     private <T> void checkDtoInput(T t) {
-        if (Objects.isNull(t) || t.toString().isBlank()) {
+        if (Objects.isNull(t) || t.toString().isBlank()
+                || t instanceof Collection && ((Collection<?>) t).isEmpty()) {
             logger.error("DTO input is null or empty");
             throw InvalidDTOException.builder().responseDTO(CommonResponseDTO.builder()
                     .status(Status.builder()
@@ -45,4 +58,6 @@ public class DTOCheckUtil {
         }
 
     }
+
+
 }
