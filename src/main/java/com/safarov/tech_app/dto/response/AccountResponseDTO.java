@@ -1,5 +1,6 @@
 package com.safarov.tech_app.dto.response;
 
+import com.safarov.tech_app.entity.Account;
 import com.safarov.tech_app.entity.Currency;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -20,4 +21,13 @@ public class AccountResponseDTO implements Serializable {
     Currency currency;
     Boolean isActive;
     Integer accountNo;
+
+    public static AccountResponseDTO entityToDTO(Account account) {
+        return AccountResponseDTO.builder()
+                .balance(account.getBalance())
+                .currency(account.getCurrency())
+                .isActive(account.getIsActive())
+                .accountNo(account.getAccountNo())
+                .build();
+    }
 }

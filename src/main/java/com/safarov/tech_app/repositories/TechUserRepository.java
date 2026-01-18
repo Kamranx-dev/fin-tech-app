@@ -12,6 +12,6 @@ public interface TechUserRepository extends JpaRepository<TechUser, Long> {
 
     boolean existsByPin(String pin);
 
-    @Query("select t from TechUser t join fetch t.accountList where t.pin =:pin")
+    @Query("select t from TechUser t left join fetch t.accountList where t.pin =:pin")
     Optional<TechUser> findByPin(@Param("pin") String pin);
 }
