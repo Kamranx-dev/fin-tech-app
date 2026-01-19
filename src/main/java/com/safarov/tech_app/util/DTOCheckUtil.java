@@ -1,6 +1,7 @@
 package com.safarov.tech_app.util;
 
 import com.safarov.tech_app.dto.request.AccountRequestDTO;
+import com.safarov.tech_app.dto.request.AccountToAccountRequestDTO;
 import com.safarov.tech_app.dto.request.AuthenticationRequestDTO;
 import com.safarov.tech_app.dto.request.UserRequestDTO;
 import com.safarov.tech_app.dto.response.CommonResponseDTO;
@@ -44,6 +45,12 @@ public class DTOCheckUtil {
     public void isValid(AuthenticationRequestDTO authenticationRequestDTO) {
         checkDtoInput(authenticationRequestDTO.getPin());
         checkDtoInput(authenticationRequestDTO.getPassword());
+    }
+
+    public void isValid(AccountToAccountRequestDTO accountToAccountRequestDTO) {
+        checkDtoInput(accountToAccountRequestDTO.getCreditAccountNo());
+        checkDtoInput(accountToAccountRequestDTO.getDebitAccountNo());
+        checkDtoInput(accountToAccountRequestDTO.getAmount());
     }
 
     private <T> void checkDtoInput(T t) {
