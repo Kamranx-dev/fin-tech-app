@@ -77,4 +77,14 @@ public class GlobalExceptionHandling {
     public ResponseEntity<?> invalidOwner(InvalidAccountOwnerException invalidAccountOwnerException) {
         return new ResponseEntity<>(invalidAccountOwnerException.getCommonResponseDTO(), HttpStatus.FORBIDDEN);
     }
+
+    @ExceptionHandler(value = CbarRestException.class)
+    public ResponseEntity<?> invalidOwner(CbarRestException cbarRestException) {
+        return new ResponseEntity<>(cbarRestException.getCommonResponseDTO(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = EqualsAccountNoException.class)
+    public ResponseEntity<?> equalsAccountNo(EqualsAccountNoException equalsAccountNoException) {
+        return new ResponseEntity<>(equalsAccountNoException.getCommonResponseDTO(), HttpStatus.BAD_REQUEST);
+    }
 }

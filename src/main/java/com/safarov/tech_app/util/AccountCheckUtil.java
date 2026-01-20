@@ -3,10 +3,8 @@ package com.safarov.tech_app.util;
 import com.safarov.tech_app.dto.response.CommonResponseDTO;
 import com.safarov.tech_app.dto.response.Status;
 import com.safarov.tech_app.dto.response.StatusCode;
-import com.safarov.tech_app.entity.Account;
 import com.safarov.tech_app.exception.EqualsAccountException;
 import com.safarov.tech_app.exception.InvalidAmountException;
-import com.safarov.tech_app.exception.NotActiveAccountException;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

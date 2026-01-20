@@ -3,6 +3,7 @@ package com.safarov.tech_app.dto.response;
 
 public enum StatusCode {
     SUCCESS,
+    CBAR_ERROR,
     INVALID_DTO,
     ALREADY_EXIST,
     USER_NOT_EXIST,
@@ -11,7 +12,9 @@ public enum StatusCode {
     INTERNAL_ERROR,
     BAD_CREDENTIALS,
     ACCOUNT_NOT_EXIST,
+    EQUALS_ACCOUNT_NO,
     NOT_ACTIVE_ACCOUNT,
-    ACCOUNT_ACCESS_FORBIDDEN, INSUFFICIENT_BALANCE
+    INSUFFICIENT_BALANCE,
+    ACCOUNT_ACCESS_FORBIDDEN
 
 }

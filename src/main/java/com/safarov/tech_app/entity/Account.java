@@ -23,6 +23,7 @@ public class Account {
     @Column(name = "Balance")
     BigDecimal balance;
     @Column(name = "Currency")
+    @Enumerated(EnumType.STRING)
     Currency currency;
     @Column(name = "Account_status")
     Boolean isActive;
