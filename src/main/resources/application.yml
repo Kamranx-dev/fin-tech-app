@@ -14,4 +14,5 @@ spring:
 
 SECRET_KEY: $91-vl+uh#6a#n=(7133@+wwkf5cy-0_(e(7!xtpzccka5q+kw
 
+URL_MB: https://www.cbar.az/currencies/%s.xml
 

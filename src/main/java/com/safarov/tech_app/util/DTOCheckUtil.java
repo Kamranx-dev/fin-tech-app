@@ -7,6 +7,8 @@ import com.safarov.tech_app.dto.request.UserRequestDTO;
 import com.safarov.tech_app.dto.response.CommonResponseDTO;
 import com.safarov.tech_app.dto.response.Status;
 import com.safarov.tech_app.dto.response.StatusCode;
+import com.safarov.tech_app.exception.EqualsAccountException;
+import com.safarov.tech_app.exception.EqualsAccountNoException;
 import com.safarov.tech_app.exception.InvalidDTOException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -14,9 +16,8 @@ import lombok.experimental.FieldDefaults;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -33,6 +34,7 @@ public class DTOCheckUtil {
 
         List<AccountRequestDTO> accountRequestDTOList = userRequestDTO.getAccountRequestDTOList();
         checkDtoInput(accountRequestDTOList);
+        checkSameAccountsNo(accountRequestDTOList);
         accountRequestDTOList.forEach(account -> {
             checkDtoInput(account.getBalance());
             checkDtoInput(account.getCurrency());
@@ -63,8 +65,20 @@ public class DTOCheckUtil {
                             .message("DTO input is null or empty")
                             .build()).build()).build();
         }
-
     }
 
+    private void checkSameAccountsNo(List<AccountRequestDTO> accountRequestDTOList) {
+        Set<Integer> accountNoSet = accountRequestDTOList
+                .stream()
+                .map(AccountRequestDTO::getAccountNo)
+                .collect(Collectors.toSet());
+
+        if (accountNoSet.size() != accountRequestDTOList.size())
+            throw EqualsAccountNoException.builder().commonResponseDTO(CommonResponseDTO.builder()
+                    .status(Status.builder()
+                            .statusCode(StatusCode.EQUALS_ACCOUNT_NO)
+                            .message("Duplicate account numbers found in the request list.")
+                            .build()).build()).build();
+    }
 
 }
