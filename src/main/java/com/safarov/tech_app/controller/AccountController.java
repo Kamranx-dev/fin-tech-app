@@ -26,5 +26,6 @@ public class AccountController {
     @PostMapping("/transfer")
     public ResponseEntity<?> transferAmount(@RequestBody AccountToAccountRequestDTO requestDTO) {
         return new ResponseEntity<>(transferMoneyService.account2account(requestDTO), HttpStatus.OK);
+
     }
 }
